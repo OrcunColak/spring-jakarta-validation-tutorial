@@ -1,4 +1,4 @@
-package com.colak.springjakartavalidationtutorial.validation;
+package com.colak.springjakartavalidationtutorial.customvalidator.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

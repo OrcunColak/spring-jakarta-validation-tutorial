@@ -1,4 +1,4 @@
-package com.colak.springjakartavalidationtutorial;
+package com.colak.springjakartavalidationtutorial.customvalidator.controller;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,10 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class SpringJakartaValidationTutorialApplicationTests {
+class CountryControllerTest {
 
     @Autowired
-    TestRestTemplate testRestTemplate;
+    private TestRestTemplate testRestTemplate;
 
     @Test
     void testValidCountryCode() {

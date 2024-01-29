@@ -1,4 +1,4 @@
-package com.colak.springjakartavalidationtutorial.controller;
+package com.colak.springjakartavalidationtutorial.exceptionhandler;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
