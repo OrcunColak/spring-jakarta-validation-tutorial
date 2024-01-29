@@ -10,6 +10,14 @@ import java.lang.annotation.Target;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+/**
+ * A custom validation annotation is created by defining a new annotation.
+ * This annotation specifies the validation rules that you want to apply to fields or methods in your classes.
+ *
+ * @Target: Defines where the annotation can be applied. In the example, it's specified for parameters.
+ * @Retention: Specifies how long the annotation should be retained. RUNTIME means it will be available at runtime for validation.
+ * @Constraint: Specifies the validator class responsible for implementing the validation logic
+ */
 @Target({ElementType.PARAMETER})
 @Retention(RUNTIME)
 @Constraint(validatedBy = CountryValidator.class)

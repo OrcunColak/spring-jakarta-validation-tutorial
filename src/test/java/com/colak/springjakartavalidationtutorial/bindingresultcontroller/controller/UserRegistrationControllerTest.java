@@ -1,20 +1,13 @@
 package com.colak.springjakartavalidationtutorial.bindingresultcontroller.controller;
 
 import com.colak.springjakartavalidationtutorial.bindingresultcontroller.dto.UserRegistrationDto;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ProblemDetail;
-import org.springframework.http.ResponseEntity;
-
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class UserRegistrationControllerTest {
@@ -24,7 +17,7 @@ class UserRegistrationControllerTest {
 
     @Test
     void testValidUser() {
-        String url = "/api/v1/user/create/";
+        String url = "/api/v1/userregistration/create";
 
         UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
         userRegistrationDto.setUsername("john");
@@ -33,21 +26,20 @@ class UserRegistrationControllerTest {
 
         HttpEntity<UserRegistrationDto> request = new HttpEntity<>(userRegistrationDto);
 
-        ResponseEntity<String> result = testRestTemplate.postForEntity(url, request, String.class);
-        assertEquals("User created successfully", result.getBody());
+        String result = testRestTemplate.postForObject(url, request, String.class);
+        assertEquals("User created successfully", result);
     }
 
     @Test
     void testInvalid() {
-        String url = "/api/v1/countries/getname/ooo";
-        ResponseEntity<ProblemDetail> response = testRestTemplate.getForEntity(url, ProblemDetail.class);
-        Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        ProblemDetail problemDetail = response.getBody();
+        String url = "/api/v1/userregistration/create";
 
-        assert problemDetail != null;
-        assertTrue(Objects.requireNonNull(problemDetail.getDetail())
-                .equalsIgnoreCase("Request validation failed")
-        );
+        UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
+
+        HttpEntity<UserRegistrationDto> request = new HttpEntity<>(userRegistrationDto);
+
+        String result = testRestTemplate.postForObject(url, request, String.class);
+        assertEquals("Validation failed", result);
     }
 
 }
