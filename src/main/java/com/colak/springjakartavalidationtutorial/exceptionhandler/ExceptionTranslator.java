@@ -19,8 +19,8 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler {
     private record InvalidatedParams (String cause, String attribute) {}
 
     @ExceptionHandler(ConstraintViolationException.class)
-    ProblemDetail handleConstraintViolationException(ConstraintViolationException e) {
-        Set<ConstraintViolation<?>> errors = e.getConstraintViolations();
+    ProblemDetail handleConstraintViolationException(ConstraintViolationException constraintViolationException) {
+        Set<ConstraintViolation<?>> errors = constraintViolationException.getConstraintViolations();
         List<InvalidatedParams> validationResponse = errors.stream()
                 .map(err -> InvalidatedParams.builder()
                         .cause(err.getMessage())
