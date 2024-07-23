@@ -1,4 +1,4 @@
-package com.colak.springjakartavalidationtutorial.customvalidator.controller;
+package com.colak.springjakartavalidationtutorial.customvalidator.countryvalidator.controller;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

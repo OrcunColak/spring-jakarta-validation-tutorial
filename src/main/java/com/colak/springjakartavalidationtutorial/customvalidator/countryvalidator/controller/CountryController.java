@@ -1,6 +1,6 @@
-package com.colak.springjakartavalidationtutorial.customvalidator.controller;
+package com.colak.springjakartavalidationtutorial.customvalidator.countryvalidator.controller;
 
-import com.colak.springjakartavalidationtutorial.customvalidator.validation.ValidCountryCode;
+import com.colak.springjakartavalidationtutorial.customvalidator.countryvalidator.validation.ValidCountryCode;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
