@@ -1,36 +1,38 @@
 package com.colak.springtutorial.exceptionhandler;
 
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
-import lombok.Builder;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ProblemDetail;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 @RestControllerAdvice
-public class ExceptionTranslator extends ResponseEntityExceptionHandler {
+public class ExceptionTranslator {
 
-    @Builder
-    private record InvalidatedParams (String cause, String attribute) {}
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    ProblemDetail handleConstraintViolationException(ConstraintViolationException constraintViolationException) {
-        Set<ConstraintViolation<?>> errors = constraintViolationException.getConstraintViolations();
-        List<InvalidatedParams> validationResponse = errors.stream()
-                .map(err -> InvalidatedParams.builder()
-                        .cause(err.getMessage())
-                        .attribute(err.getPropertyPath().toString())
-                        .build()
-                ).toList();
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleMethodArgumentNotValidExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        BindingResult bindingResult = ex.getBindingResult();
+        List<ObjectError> allErrors = bindingResult.getAllErrors();
 
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Request validation failed");
-        problemDetail.setTitle("Validation Failed");
-        problemDetail.setProperty("invalidParams", validationResponse);
-        return problemDetail;
+        allErrors.forEach(error -> {
+            FieldError fieldError = (FieldError) error;
+            String fieldName = fieldError.getField();
+            String errorMessage = fieldError.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
     }
+
+
 }

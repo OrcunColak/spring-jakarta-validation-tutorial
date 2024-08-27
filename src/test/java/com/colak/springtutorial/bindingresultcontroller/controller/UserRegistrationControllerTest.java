@@ -31,7 +31,7 @@ class UserRegistrationControllerTest {
     }
 
     @Test
-    void testInvalid() {
+    void testInvalid1() {
         String url = "/api/v1/userregistration/create";
 
         UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
@@ -40,6 +40,19 @@ class UserRegistrationControllerTest {
 
         String result = testRestTemplate.postForObject(url, request, String.class);
         assertEquals("Validation failed", result);
+    }
+
+    @Test
+    void testInvalid2() {
+        String url = "/api/v1/userregistration2/create";
+
+        UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
+
+        HttpEntity<UserRegistrationDto> request = new HttpEntity<>(userRegistrationDto);
+
+        String result = testRestTemplate.postForObject(url, request, String.class);
+        assertEquals("""
+                {"username":"Please provide a username"}""", result);
     }
 
 }

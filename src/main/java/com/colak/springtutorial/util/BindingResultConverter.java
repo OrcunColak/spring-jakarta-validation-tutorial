@@ -21,7 +21,7 @@ public class BindingResultConverter {
         return bindingResult.getFieldErrors()
                 .stream()
                 .collect(Collectors.groupingBy(FieldError::getField,
-                        Collectors.mapping(e -> messageSource.getMessage(e, LocaleContextHolder.getLocale()),
+                        Collectors.mapping(fieldError -> messageSource.getMessage(fieldError, LocaleContextHolder.getLocale()),
                                 Collectors.toList())));
     }
 }
