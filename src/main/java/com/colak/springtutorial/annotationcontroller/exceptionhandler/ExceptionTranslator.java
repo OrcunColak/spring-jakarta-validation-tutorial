@@ -14,6 +14,23 @@ import java.util.List;
 @RestControllerAdvice
 public class ExceptionTranslator {
 
+    // Old code to return Map<String, String>
+    // @ResponseStatus(HttpStatus.BAD_REQUEST)
+    // @ExceptionHandler(MethodArgumentNotValidException.class)
+    // public Map<String, String> handleMethodArgumentNotValidExceptions(
+    //         MethodArgumentNotValidException ex) {
+    //     Map<String, String> errors = new HashMap<>();
+    //     BindingResult bindingResult = ex.getBindingResult();
+    //     List<ObjectError> allErrors = bindingResult.getAllErrors();
+    //
+    //     allErrors.forEach(error -> {
+    //         FieldError fieldError = (FieldError) error;
+    //         String fieldName = fieldError.getField();
+    //         String errorMessage = fieldError.getDefaultMessage();
+    //         errors.put(fieldName, errorMessage);
+    //     });
+    //     return errors;
+    // }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -31,6 +48,4 @@ public class ExceptionTranslator {
 
         return problemDetail;
     }
-
-
 }
