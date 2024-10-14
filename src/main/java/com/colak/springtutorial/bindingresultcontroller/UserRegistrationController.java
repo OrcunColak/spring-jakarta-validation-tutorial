@@ -23,9 +23,7 @@ public class UserRegistrationController {
 
     private final BindingResultConverter bindingResultConverter;
 
-    /**
-     * The controller receives BindingResult
-     */
+    // The controller receives BindingResult
     @PostMapping(path = "create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createUser(@RequestBody @Valid UserRegistrationDto userRegistrationDto,
                                              BindingResult bindingResult) {
@@ -33,7 +31,7 @@ public class UserRegistrationController {
             Map<String, List<String>> errorMap = bindingResultConverter.errorMap(bindingResult);
             log.info("Error Map : {}", errorMap);
 
-            return ResponseEntity.badRequest().body("Validation failed");
+            return ResponseEntity.badRequest().body(errorMap.toString());
         }
         return ResponseEntity.ok("User created successfully");
     }
