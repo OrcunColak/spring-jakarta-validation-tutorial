@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.ProblemDetail;
+
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,9 +39,10 @@ class UserRegistrationController2Test {
 
         HttpEntity<UserRegistrationDto> request = new HttpEntity<>(userRegistrationDto);
 
-        String result = testRestTemplate.postForObject(url, request, String.class);
-        assertEquals("""
-                {"username":"Please provide a username"}""", result);
-    }
+        ProblemDetail result = testRestTemplate.postForObject(url, request, ProblemDetail.class);
+        Map<String, Object> properties = result.getProperties();
+        assert properties != null;
 
+        assertEquals("Please provide a username", properties.get("username"));
+    }
 }
