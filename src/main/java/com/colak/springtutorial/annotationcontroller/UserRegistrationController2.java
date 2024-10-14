@@ -1,6 +1,6 @@
-package com.colak.springtutorial.bindingresultcontroller.controller;
+package com.colak.springtutorial.annotationcontroller;
 
-import com.colak.springtutorial.bindingresultcontroller.dto.UserRegistrationDto;
+import com.colak.springtutorial.dto.UserRegistrationDto;
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

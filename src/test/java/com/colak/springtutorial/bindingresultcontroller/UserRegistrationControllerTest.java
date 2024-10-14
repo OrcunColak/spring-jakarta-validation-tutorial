@@ -1,6 +1,6 @@
-package com.colak.springtutorial.bindingresultcontroller.controller;
+package com.colak.springtutorial.bindingresultcontroller;
 
-import com.colak.springtutorial.bindingresultcontroller.dto.UserRegistrationDto;
+import com.colak.springtutorial.dto.UserRegistrationDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,10 +15,10 @@ class UserRegistrationControllerTest {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
+    private final String url = "/api/v1/userregistration/create";
+
     @Test
     void testValidUser() {
-        String url = "/api/v1/userregistration/create";
-
         UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
         userRegistrationDto.setUsername("john");
         userRegistrationDto.setPassword("12345678");
@@ -32,27 +32,12 @@ class UserRegistrationControllerTest {
 
     @Test
     void testInvalid1() {
-        String url = "/api/v1/userregistration/create";
-
         UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
 
         HttpEntity<UserRegistrationDto> request = new HttpEntity<>(userRegistrationDto);
 
         String result = testRestTemplate.postForObject(url, request, String.class);
         assertEquals("Validation failed", result);
-    }
-
-    @Test
-    void testInvalid2() {
-        String url = "/api/v1/userregistration2/create";
-
-        UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
-
-        HttpEntity<UserRegistrationDto> request = new HttpEntity<>(userRegistrationDto);
-
-        String result = testRestTemplate.postForObject(url, request, String.class);
-        assertEquals("""
-                {"username":"Please provide a username"}""", result);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.colak.springtutorial.exceptionhandler;
+package com.colak.springtutorial.annotationcontroller.exceptionhandler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;

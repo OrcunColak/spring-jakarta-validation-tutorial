@@ -1,7 +1,6 @@
-package com.colak.springtutorial.bindingresultcontroller.controller;
+package com.colak.springtutorial.bindingresultcontroller;
 
-import com.colak.springtutorial.bindingresultcontroller.dto.UserRegistrationDto;
-import com.colak.springtutorial.util.BindingResultConverter;
+import com.colak.springtutorial.dto.UserRegistrationDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

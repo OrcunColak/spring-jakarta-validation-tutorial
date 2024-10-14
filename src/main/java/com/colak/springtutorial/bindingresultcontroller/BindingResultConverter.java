@@ -1,4 +1,4 @@
-package com.colak.springtutorial.util;
+package com.colak.springtutorial.bindingresultcontroller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;

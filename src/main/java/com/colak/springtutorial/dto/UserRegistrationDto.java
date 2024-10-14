@@ -1,4 +1,4 @@
-package com.colak.springtutorial.bindingresultcontroller.dto;
+package com.colak.springtutorial.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
