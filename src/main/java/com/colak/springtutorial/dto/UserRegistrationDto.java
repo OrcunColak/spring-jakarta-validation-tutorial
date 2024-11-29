@@ -9,13 +9,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserRegistrationDto {
-    @NotBlank(message = "Please provide a username")
+
+    @NotBlank(message = "{user.username.blank}")
     private String username;
 
-    @Size(min = 8, message = "Password must be at least 8 characters long")
+    @Size(min = 8, message = "{user.password.size}")
     private String password;
 
-    @Email(message = "Please provide a valid email address")
+    @Email(message = "{user.email.invalid}")
     private String email;
-
 }
