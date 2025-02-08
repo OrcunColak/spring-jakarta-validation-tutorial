@@ -47,6 +47,6 @@ class UserRegistrationControllerTest {
         // Assert that the error response contains the expected fields and messages
         // Get the response body as a Map representing the error response
         String errorResponse = response.getBody();
-        assertThat(errorResponse).isEqualTo("{username=[Please provide a username]}");
+        assertThat(errorResponse).isEqualTo("{password=[Password must be at least 8 characters long], username=[Please provide a username]}");
     }
 }
